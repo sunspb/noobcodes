@@ -1,0 +1,24 @@
+import random
+
+def get_random_image(image_list):
+  """
+  Get a random image from a list.
+
+  Args:
+    image_list: A list of images.
+
+  Returns:
+    A random image.
+  """
+  random_index = random.randint(0, len(image_list) - 1)
+  return image_list[random_index]
+
+if __name__ == "__main__":
+  # Create a list of images.
+  image_list = ["image1.jpg", "image2.jpg", "image3.jpg"]
+
+  # Get a random image from the list.
+  random_image = get_random_image(image_list)
+
+  # Display the random image.
+  print(random_image)
