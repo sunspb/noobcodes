@@ -1,0 +1,48 @@
+import os
+
+def count_strings_in_file(file_path):
+  """
+  Counts the number of strings in a text file.
+
+  Args:
+    file_path: The path to the text file.
+
+  Returns:
+    The number of strings in the text file.
+  """
+  with open(file_path, "r") as f:
+    string_count = 0
+    for line in f:
+      string_count += len(line.split())
+  return string_count
+
+def get_bigger_number(number1, number2):
+  """
+  Returns the bigger number.
+
+  Args:
+    number1: The first number.
+    number2: The second number.
+
+  Returns:
+    The bigger number.
+  """
+  if number1 > number2:
+    return number1
+  else:
+    return number2
+
+if __name__ == "__main__":
+  # Get the paths to the two text files.
+  file_path1 = "file1.txt"
+  file_path2 = "file2.txt"
+
+  # Count the number of strings in each file.
+  string_count1 = count_strings_in_file(file_path1)
+  string_count2 = count_strings_in_file(file_path2)
+
+  # Get the bigger number.
+  bigger_number = get_bigger_number(string_count1, string_count2)
+
+  # Print the bigger number.
+  print(bigger_number)
