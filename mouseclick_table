@@ -1,0 +1,57 @@
+import mouse
+import os
+
+def get_mouse_click_coordinates(event):
+  """
+  Gets the coordinates of a mouse click event.
+
+  Args:
+    event: The mouse click event.
+
+  Returns:
+    The coordinates of the mouse click event.
+  """
+  x, y = event.x, event.y
+  return x, y
+
+def write_mouse_click_coordinates_to_file(file_path, left_click_coordinates, right_click_coordinates):
+  """
+  Writes the coordinates of left and right mouse clicks to a file.
+
+  Args:
+    file_path: The path to the file.
+    left_click_coordinates: A list of the coordinates of left mouse clicks.
+    right_click_coordinates: A list of the coordinates of right mouse clicks.
+  """
+  with open(file_path, "w") as f:
+    f.write("left click, right click\n")
+    for left_click_coordinate, right_click_coordinate in zip(left_click_coordinates, right_click_coordinates):
+      f.write("%s, %s\n" % (left_click_coordinate, right_click_coordinate))
+
+def main():
+  """
+  The main function of the program.
+  """
+  file_path = "mouse_click_coordinates.txt"
+  left_click_coordinates = []
+  right_click_coordinates = []
+
+  # Listen for mouse click events.
+  mouse.on_click(get_mouse_click_coordinates)
+
+  # Keep looping until the wheel button is pushed.
+  while not mouse.is_wheel_button_pressed():
+    # Get the coordinates of the latest mouse click event.
+    x, y = mouse.get_click_coordinates()
+
+    # Check if the mouse click event was a left or right click.
+    if mouse.is_left_click():
+      left_click_coordinates.append((x, y))
+    elif mouse.is_right_click():
+      right_click_coordinates.append((x, y))
+
+  # Write the coordinates of left and right mouse clicks to a file.
+  write_mouse_click_coordinates_to_file(file_path, left_click_coordinates, right_click_coordinates)
+
+if __name__ == "__main__":
+  main()
