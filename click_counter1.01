@@ -1,0 +1,32 @@
+import pyautogui
+import time
+import sys
+
+def main():
+  # Set the screen to fullscreen with black background
+  pyautogui.size()
+  pyautogui.screenshot('full_screen.png')
+  pyautogui.display.set_fullscreen(True)
+  pyautogui.set_background_color('#000000')
+
+  # Initialize variables
+  clicks = {'left': 0, 'right': 0, 'middle': 0}
+  timer = 60
+
+  # Start the timer
+  while timer > 0:
+    text = f'Time remaining: {timer} seconds'
+    pyautogui.write(text, color='#ff00ff', font='Arial', size=30)
+    pyautogui.sleep(1)
+    timer -= 1
+
+    # Update the click counts
+    for button in ['left', 'right', 'middle']:
+      clicks[button] += pyautogui.is_pressed(button)
+
+  # Stop the timer and show the results
+  text = f'Time is over! You clicked {clicks["left"]} left, {clicks["right"]} right, and {clicks["middle"]} middle buttons.'
+  pyautogui.write(text, color='#ff00ff', font='Arial', size=30)
+
+if __name__ == '__main__':
+  main()
