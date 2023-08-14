@@ -1,0 +1,36 @@
+import os
+import time
+from colorama import Fore, Style
+
+def clear_screen():
+  os.system("cls")
+
+def set_screen_color(color):
+  os.system(f"color {color}")
+
+def print_text(text, size, x, y):
+  clear_screen()
+  set_screen_color(Fore.YELLOW)
+  print(text.center(size, " "))
+  time.sleep(1)
+
+def countdown(seconds):
+  for i in range(seconds, 0, -1):
+    if i == 0:
+      set_screen_color(Fore.RED)
+    else:
+      set_screen_color(Fore.BLUE + Style.BRIGHT)
+    print(str(i).center(20, " "))
+    time.sleep(1)
+    set_screen_color(Fore.BLUE)
+
+def main():
+  clear_screen()
+  print_text("Press any key", 20, 0, 0)
+  input()
+  countdown(60)
+  print_text(":Time is over", 20, 0, 0)
+  input()
+
+if __name__ == "__main__":
+  main()
