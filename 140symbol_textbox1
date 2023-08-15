@@ -1,0 +1,20 @@
+import sys
+import termcolor
+
+def main():
+    current_length = 0
+    while True:
+        symbol = input('Enter a symbol: ')
+        if symbol == '\n':
+            break
+        else:
+            if current_length < 140:
+                print(termcolor.colored(symbol, 'black'), end='')
+                current_length += len(symbol)
+            else:
+                print(termcolor.colored(symbol, 'red'), end='')
+                current_length += len(symbol)
+    print('Number of symbols printed:', current_length)
+
+if __name__ == '__main__':
+    main()
