@@ -1,0 +1,44 @@
+import tkinter as tk
+from random import randint
+
+# Create a full-screen window with dark grey background and orange text box
+root = tk.Tk()
+root.attributes("-fullscreen", True)
+root.configure(bg="darkgrey")
+text_box = tk.Text(root, foreground="orange", height=1, width=50)
+text_box.pack()
+
+# Initialize variables
+a1 = None
+a2 = None
+
+# Function to clear the text box
+def clear_text():
+  text_box.delete(1.0, "end")
+
+# Function to generate a random number in the range between a1 and a2
+def generate_number():
+  global a1
+  global a2
+  number = randint(a1, a2)
+  text_box.insert(tk.END, str(number))
+
+# Function to open the mp3 file with the same serial number as the generated number
+def open_mp3_file():
+  global number
+  try:
+    mp3_file = f"{number}.mp3"
+    subprocess.call(["open", mp3_file])
+  except FileNotFoundError:
+    print("File not found.")
+
+# Bind keyboard and mouse events
+root.bind("<Key>", clear_text)
+root.bind("<Button-1>", open_mp3_file)
+root.bind("<Button-3>", generate_number)
+
+# Display the "Enter first number" text
+text_box.insert(tk.END, "Enter first number")
+
+# Start the main loop
+root.mainloop()
