@@ -1,0 +1,36 @@
+import turtle
+from math import degrees
+
+# Initialize the turtle
+turtle.shape("turtle")
+turtle.speed(0)
+
+# Ask the user to input the side lengths of the triangle
+side1 = float(input("Enter the first side length: "))
+side2 = float(input("Enter the second side length: "))
+side3 = float(input("Enter the third side length: "))
+
+# Check if the side lengths can form a triangle
+if side1 + side2 < side3 or side1 + side3 < side2 or side2 + side3 < side1:
+  print("The side lengths cannot form a triangle.")
+  exit()
+
+# Calculate the angles of the triangle
+angle1 = degrees(math.acos((side2**2 + side3**2 - side1**2) / (2 * side2 * side3)))
+angle2 = degrees(math.acos((side1**2 + side3**2 - side2**2) / (2 * side1 * side3)))
+angle3 = degrees(math.acos((side1**2 + side2**2 - side3**2) / (2 * side1 * side2)))
+
+# Draw the triangle
+turtle.penup()
+turtle.goto(0, 0)
+turtle.pendown()
+turtle.forward(side1)
+turtle.left(angle1)
+turtle.forward(side2)
+turtle.left(angle2)
+turtle.forward(side3)
+
+# Print the angles of the triangle
+print("Angle 1:", angle1, "degrees")
+print("Angle 2:", angle2, "degrees")
+print("Angle 3:", angle3, "degrees")
