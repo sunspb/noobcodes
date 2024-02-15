@@ -1,0 +1,42 @@
+def replace_characters(filename, symbol1, symbol2):
+  """
+  Функция для замены символов в текстовом файле.
+
+  Args:
+    filename: Имя текстового файла.
+    symbol1: Символ, который нужно заменить.
+    symbol2: Символ, на который нужно заменить.
+
+  Returns:
+    None.
+  """
+
+  # Чтение содержимого файла
+  try:
+    with open(filename, "r") as file:
+      text = file.read()
+  except FileNotFoundError:
+    print(f"Файл '{filename}' не найден.")
+    return
+
+  # Замена символов
+  new_text = text.replace(symbol1, symbol2)
+
+  # Запись нового содержимого в файл
+  try:
+    with open(filename, "w") as file:
+      file.write(new_text)
+  except IOError:
+    print(f"Ошибка при записи в файл '{filename}'.")
+
+# Ввод имени файла
+filename = input("Введите имя текстового файла: ")
+
+# Ввод символов
+symbol1 = input("Введите символ, который нужно заменить: ")
+symbol2 = input("Введите символ, на который нужно заменить: ")
+
+# Вызов функции
+replace_characters(filename, symbol1, symbol2)
+
+print("Символы в файле успешно заменены.")
