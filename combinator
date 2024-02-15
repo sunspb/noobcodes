@@ -1,0 +1,25 @@
+def factorial(n):
+  """
+  Функция для вычисления факториала.
+
+  Args:
+    n: Целое число.
+
+  Returns:
+    Факториал n.
+  """
+
+  if n == 0:
+    return 1
+  else:
+    return n * factorial(n - 1)
+
+# Ввод a и k
+a = int(input("Введите a: "))
+k = int(input("Введите k: "))
+
+# Вычисление количества комбинаций
+combinations = factorial(a) // (factorial(k) * factorial(a - k))
+
+# Вывод результата
+print(f"Количество комбинаций из {a} по {k}: {combinations}")
