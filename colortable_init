@@ -1,0 +1,65 @@
+from PIL import Image
+
+def get_color_table(image_path):
+  """
+  Функция принимает путь к изображению и возвращает таблицу цветов в виде словаря.
+
+  Args:
+    image_path: Путь к файлу изображения.
+
+  Returns:
+    Словарь, где ключом является цвет в формате HTML/CSS, а значением - количество пикселей этого цвета.
+  """
+
+  # Открытие изображения
+  image = Image.open(image_path)
+
+  # Получение размеров изображения
+  width, height = image.size
+
+  # Создание словаря для хранения цветов
+  color_table = {}
+
+  # Перебор всех пикселей изображения
+  for x in range(width):
+    for y in range(height):
+      # Получение цвета пикселя
+      pixel_color = image.getpixel((x, y))
+
+      # Преобразование цвета в формат HTML/CSS
+      html_color = "#{:02x}{:02x}{:02x}".format(*pixel_color)
+
+      # Увеличение счетчика для данного цвета
+      color_table[html_color] = color_table.get(html_color, 0) + 1
+
+  return color_table
+
+
+def write_color_table_to_file(color_table, output_path):
+  """
+  Функция записывает таблицу цветов в файл.
+
+  Args:
+    color_table: Словарь, где ключом является цвет в формате HTML/CSS, а значением - количество пикселей этого цвета.
+    output_path: Путь к выходному файлу.
+
+  """
+
+  with open(output_path, "w") as f:
+    for color, count in color_table.items():
+      f.write(f"{color}: {count}\n")
+
+
+# Путь к изображению
+image_path = "image.jpg"
+
+# Путь к выходному файлу
+output_path = "color_table.txt"
+
+# Получение таблицы цветов
+color_table = get_color_table(image_path)
+
+# Запись таблицы цветов в файл
+write_color_table_to_file(color_table, output_path)
+
+print("Таблица цветов успешно записана в файл:", output_path)
